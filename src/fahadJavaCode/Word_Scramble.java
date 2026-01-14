@@ -1,8 +1,7 @@
 package fahadJavaCode;
 
 import java.awt.EventQueue;
-
-import java.util.random.*;
+import java.util.Random;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -11,6 +10,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class Word_Scramble {
 
@@ -53,16 +53,19 @@ public class Word_Scramble {
 		JLabel lblNewLabel = new JLabel("Word Scrambler");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblNewLabel.setBounds(47, 11, 418, 58);
+		lblNewLabel.setBounds(53, 11, 418, 58);
 		frame.getContentPane().add(lblNewLabel);
 		
 		textField = new JTextField();
+		textField.setHorizontalAlignment(SwingConstants.CENTER);
+		textField.setBackground(new Color(255, 255, 255));
 		textField.setFont(new Font("Tahoma", Font.BOLD, 14));
 		textField.setBounds(119, 115, 308, 58);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
+		textField_1.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_1.setFont(new Font("Tahoma", Font.BOLD, 14));
 		textField_1.setBounds(119, 238, 308, 58);
 		frame.getContentPane().add(textField_1);
@@ -82,15 +85,38 @@ public class Word_Scramble {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				
+				
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnNewButton.setBounds(196, 300, 111, 36);
+		frame.getContentPane().add(btnNewButton);
+		
+		JButton btnGenerate = new JButton("Generate");
+		btnGenerate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
 				String[] wordBank = new String[] {"galaxy", "puzzle", "whisper", "lantern", "orbit", "cactus", "thunder", "marble", "voyage", "crystal", "shadow", "ember", "compass", "ripple", "rocket", "mirror"};
 				
 				int rand = (int)(Math.random() * wordBank.length);
 				textField.setText(wordBank[rand]);
 				
+				String randWord = wordBank[rand];
+				char[] letters = randWord.toCharArray();
+				Random rund = new Random();
+			
+			/*	
+			public static void shuffle() {
+				
+				
+			}
+			*/
+				
 			}
 		});
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnNewButton.setBounds(200, 184, 111, 36);
-		frame.getContentPane().add(btnNewButton);
+		btnGenerate.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnGenerate.setBounds(196, 184, 111, 36);
+		frame.getContentPane().add(btnGenerate);
 	}
 }
