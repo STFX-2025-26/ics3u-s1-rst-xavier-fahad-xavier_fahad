@@ -53,13 +53,18 @@ public class Word_Scramble {
 		frame.getContentPane().add(lblNewLabel);
 		
 		textField = new JTextField();
-		textField.setBounds(119, 95, 308, 58);
+		textField.setBounds(119, 115, 308, 58);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(99, 187, 330, 71);
+		textField_1.setBounds(119, 238, 308, 58);
 		frame.getContentPane().add(textField_1);
 		textField_1.setColumns(10);
+		
+		JLabel lblNewLabel_1 = new JLabel("Unscramble this:");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNewLabel_1.setBounds(10, 78, 138, 41);
+		frame.getContentPane().add(lblNewLabel_1);
 	}
 }
