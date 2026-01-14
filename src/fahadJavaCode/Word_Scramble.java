@@ -2,11 +2,15 @@ package fahadJavaCode;
 
 import java.awt.EventQueue;
 
+import java.util.random.*;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Word_Scramble {
 
@@ -53,18 +57,40 @@ public class Word_Scramble {
 		frame.getContentPane().add(lblNewLabel);
 		
 		textField = new JTextField();
+		textField.setFont(new Font("Tahoma", Font.BOLD, 14));
 		textField.setBounds(119, 115, 308, 58);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
+		textField_1.setFont(new Font("Tahoma", Font.BOLD, 14));
 		textField_1.setBounds(119, 238, 308, 58);
 		frame.getContentPane().add(textField_1);
 		textField_1.setColumns(10);
 		
-		JLabel lblNewLabel_1 = new JLabel("Unscramble this:");
+		JLabel lblNewLabel_1 = new JLabel("Your guess:");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel_1.setBounds(10, 78, 138, 41);
+		lblNewLabel_1.setBounds(23, 203, 138, 41);
 		frame.getContentPane().add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("Unscramble this:");
+		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNewLabel_1_1.setBounds(0, 80, 138, 41);
+		frame.getContentPane().add(lblNewLabel_1_1);
+		
+		JButton btnNewButton = new JButton("Check");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String[] wordBank = new String[] {"galaxy", "puzzle", "whisper", "lantern", "orbit", "cactus", "thunder", "marble", "voyage", "crystal", "shadow", "ember", "compass", "ripple", "rocket", "mirror"};
+				
+				int rand = (int)(Math.random() * wordBank.length);
+				textField.setText(wordBank[rand]);
+				
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnNewButton.setBounds(200, 184, 111, 36);
+		frame.getContentPane().add(btnNewButton);
 	}
 }
