@@ -11,13 +11,16 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import javax.swing.JCheckBox;
 
 public class Word_Scramble {
 
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
-
+	String[] wordBank = new String[] {"galaxy", "puzzle", "whisper", "lantern", "orbit", "cactus", "thunder", "marble", "voyage", "crystal", "shadow", "ember", "compass", "ripple", "rocket", "mirror"};
+	int rand = (int)(Math.random() * wordBank.length);
+	private JTextField textField_2;
 	/**
 	 * Launch the application.
 	 */
@@ -81,42 +84,59 @@ public class Word_Scramble {
 		lblNewLabel_1_1.setBounds(0, 80, 138, 41);
 		frame.getContentPane().add(lblNewLabel_1_1);
 		
-		JButton btnNewButton = new JButton("Check");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				
-				
-			}
-		});
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnNewButton.setBounds(196, 300, 111, 36);
-		frame.getContentPane().add(btnNewButton);
-		
 		JButton btnGenerate = new JButton("Generate");
 		btnGenerate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				String[] wordBank = new String[] {"galaxy", "puzzle", "whisper", "lantern", "orbit", "cactus", "thunder", "marble", "voyage", "crystal", "shadow", "ember", "compass", "ripple", "rocket", "mirror"};
-				
-				int rand = (int)(Math.random() * wordBank.length);
-				textField.setText(wordBank[rand]);
-				
 				String randWord = wordBank[rand];
 				char[] letters = randWord.toCharArray();
 				Random rund = new Random();
-			
-			/*	
-			public static void shuffle() {
 				
+				for (int i = letters.length - 1; i > 0; i--) {
+				    int j = rund.nextInt(i + 1); // pick a random index
+				    
+				    // Swap letters[i] and letters[j]
+				    char temp = letters[i];
+				    letters[i] = letters[j];
+				    letters[j] = temp;
+				}
+				String ScrambledWord = new String(letters);
+				textField.setText(ScrambledWord);
 				
 			}
-			*/
+		});
+		
+		JButton btnNewButton = new JButton("Check");
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnNewButton.setBounds(196, 300, 111, 36);
+		frame.getContentPane().add(btnNewButton);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String userGuess = textField_1.getText();
+				userGuess = userGuess.toLowerCase();
+				
+				
+				if (userGuess.equals(wordBank[rand])) {
+					textField_2.setBackground(Color.GREEN);
+					textField_2.setText("Good guess !!!");
+				}
+				
+				else {
+					textField_2.setBackground(Color.RED);
+					textField_2.setText("Try Again :( ");
+				}
 				
 			}
 		});
 		btnGenerate.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnGenerate.setBounds(196, 184, 111, 36);
 		frame.getContentPane().add(btnGenerate);
+		
+		textField_2 = new JTextField();
+		textField_2.setBackground(Color.WHITE);
+		textField_2.setBounds(341, 194, 86, 20);
+		frame.getContentPane().add(textField_2);
+		textField_2.setColumns(10);
 	}
 }
