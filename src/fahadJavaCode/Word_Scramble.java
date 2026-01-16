@@ -21,9 +21,9 @@ public class Word_Scramble {
 	ImageIcon myPicture2 = new ImageIcon(getClass().getResource("/fahadJavaCode/PartyPopper3.PNG"));
 	String[] wordBank = new String[] {"galaxy", "puzzle", "whisper", "lantern", "orbit", "cactus", "thunder", "marble", "voyage", "crystal", "shadow", "ember", "compass", "ripple", "rocket", "mirror"};
 	int rand;
+	String currentWord;
 	
 	private JTextField textField_2;
-	private JTextField textField_3;
 	private JLabel lblNewLabel;
 	/**
 	 * Launch the application.
@@ -85,15 +85,6 @@ public class Word_Scramble {
 		PicLabel.setBounds(124, 0, 276, 139);
 		frame.getContentPane().add(PicLabel);
 		
-		JButton btnReavealButton = new JButton("Reveal");
-		btnReavealButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				
-				
-			}
-		});
-		
 		JButton btnCheckButton = new JButton("Check");
 		btnCheckButton.setEnabled(false);
 		btnCheckButton.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -102,7 +93,7 @@ public class Word_Scramble {
 		btnCheckButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				String currentWord = wordBank[rand];
+				currentWord = wordBank[rand];
 				String userGuess = textField_1.getText();
 				userGuess = userGuess.toLowerCase();
 				
@@ -117,6 +108,15 @@ public class Word_Scramble {
 					textField_2.setBackground(Color.RED);
 					textField_2.setText("Try Again :( ");
 				}
+				
+			}
+		});
+		
+		JButton btnReavealButton = new JButton("Reveal");
+		btnReavealButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				textField_1.setText(currentWord);
 				
 			}
 		});
@@ -137,7 +137,7 @@ public class Word_Scramble {
 				rand = (int)(Math.random() * wordBank.length);
 				
 				// separate word into characters array(letters)
-				String currentWord = wordBank[rand];
+				currentWord = wordBank[rand];
 				char[] letters = currentWord.toCharArray();
 				Random rund = new Random();
 				
@@ -179,7 +179,11 @@ public class Word_Scramble {
 		frame.getContentPane().add(lblNewLabel);
 		
 		btnReavealButton.setEnabled(false);
-		btnReavealButton.setBounds(346, 307, 89, 23);
+		btnReavealButton.setBounds(347, 320, 89, 23);
 		frame.getContentPane().add(btnReavealButton);
+		
+		JLabel lblNewLabel_2 = new JLabel("Only after 2 trys.");
+		lblNewLabel_2.setBounds(347, 306, 128, 13);
+		frame.getContentPane().add(lblNewLabel_2);
 	}
 }
