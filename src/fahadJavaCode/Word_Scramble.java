@@ -88,6 +88,7 @@ public class Word_Scramble {
 		btnGenerate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				
 				String randWord = wordBank[rand];
 				char[] letters = randWord.toCharArray();
 				Random rund = new Random();
