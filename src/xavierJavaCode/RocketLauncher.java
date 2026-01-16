@@ -7,8 +7,7 @@ public class RocketLauncher {
 		
 		// Variables
 		Scanner sc = new Scanner(System.in);
-		int altitude = 0;
-		double fuelAmount = 0.0;
+		int fuelAmount = 0;
 		String[] planetsArray = {"Venus", "Earth","Mars", "Jupiter", "Neptune", "Ceres"};
 		String planet = "";
 		int thrust = 0;
@@ -16,11 +15,13 @@ public class RocketLauncher {
 		String rocket = "";
 		double[] gravityArray = {8.87, 9.8, 3.71, 24.8, 11.2, 0.27};
 		double gravity = 0.0;
-		int[] rocketWeight = {2030000, 590000, 2610000, 4989516, 1420000};
-		int rocketMass = 0;
+		double rocketWeight = 0.0;
+		int[] massArray = {2030000, 590000, 2610000, 4989516, 1420000};
+		int mass = 0;
 		int planetChoice = 0;
 		int rocketChoice = 0;
 		String next = "";
+		boolean fuelLevel = false;
 		
 		// Planet Selection
 		System.out.println("Which planet would you like?");
@@ -53,7 +54,7 @@ public class RocketLauncher {
 		
 		// Rocket selection
 		System.out.println("");
-		System.out.println("(Press any Key and Enter to Continue)");
+		System.out.println("(Press any Key then Enter to Continue)");
 		next = sc.next();
 		
 		System.out.println("Select your Rocket");
@@ -81,12 +82,86 @@ public class RocketLauncher {
 		rocket =  rocketsArray[rocketChoice];
 		System.out.println("You chose: " + rocket);
 		
-		rocketMass = rocketWeight[rocketChoice];
-		System.out.println("The mass of the rocket is " + rocketMass + "Kg");
+		mass = massArray[rocketChoice];
+		rocketWeight = mass * gravity;
+		System.out.println("The mass of the rocket is " + mass + "Kg");
+		
+		
+		// Fuel
+		System.out.println("");
+		System.out.println("(Press any Key then Enter to Continue)");
+		next = sc.next();
+		
+		System.out.println("How much fuel(kg) would you like to enter?");
+		fuelAmount = sc.nextInt();
+		
+		// Thrust
+		System.out.println("");
+		System.out.println("(Press any Key then Enter to Continue)");
+		next = sc.next();
+		
+		System.out.println("How much thrust?");
+		thrust = sc.nextInt();
+		
+		// Does rocket have fuel
+		if (fuelAmount <= 0) {
+			System.out.println("Your Rocket doesn't have any fuel");
+			System.out.println("Launch failed");
+			System.exit(0);
+		}
+		else if (fuelAmount > 0) {
+			System.out.println("Your Rocket has fuel.");
+		}
+		
+		// Thrust amount
+		if (thrust <= rocketWeight) {
+			System.out.println("Launch failed");
+			System.out.println("Cannot carry mass of rocket");
+			System.exit(0);
+		}
+		else if(thrust > rocketWeight) {
+			System.out.println("Has enough thrust to lift rocket");
+		}
+		
+		// Fuel levels
+		fuelLevel = fuelLevel(fuelAmount, rocketWeight);
+		
+		if (fuelLevel = true) {
+			System.out.println("Fuel is high");
+			System.out.println("Launch was GREAT!");
+		}
+		
+		if (fuelLevel = false) {
+			System.out.println("Fuel is Low");
+			System.out.println("Launch was short.");
+		}
+		
+		
+		
+		
+		
 		
 		// for memory management
 		sc.close();
 
+	}
+	
+	/*Description - determines if fuel is more or less than half the mass of the rocket
+	 * Parameters - int fuel, int mass
+	 * Return Type - boolean
+	 */
+	public static boolean fuelLevel(int fuel, double weight) {
+		
+		if (fuel > weight * 0.5) {
+			return true;
+		}
+		
+		if (fuel <= weight * 0.5) {
+			return false;
+		}
+		else
+			return false;
+		
 	}
 
 }
