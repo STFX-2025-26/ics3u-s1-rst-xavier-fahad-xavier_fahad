@@ -7,7 +7,7 @@ public class RocketLauncher {
 		
 		// Variables
 		Scanner sc = new Scanner(System.in);
-		int fuelAmount = 0;
+		int fuelAmount = -1;
 		String[] planetsArray = {"Venus", "Earth","Mars", "Jupiter", "Neptune", "Ceres"};
 		String planet = "";
 		int thrust = 0;
@@ -22,6 +22,7 @@ public class RocketLauncher {
 		int rocketChoice = 0;
 		String next = "";
 		boolean fuelLevel = false;
+		String choice = "";
 		
 		// Planet Selection
 		System.out.println("Which planet would you like?");
@@ -31,13 +32,17 @@ public class RocketLauncher {
 		}
 		
 		while ( planetChoice <= 0 || planetChoice > 6) {
+			
+			
+			choice = sc.next();
 			try {
-				planetChoice = sc.nextInt();
+				planetChoice = Integer.parseInt(choice);
 			}
-			catch (Exception e) {			
+			catch (Exception e) {
+				System.out.println("Enter an Integer");
 			}	
 		
-			if (planetChoice <= 0) {
+			if (planetChoice <= -1) {
 				System.out.println("Invalid Entry");
 			}
 			if (planetChoice > 6) {
@@ -63,17 +68,20 @@ public class RocketLauncher {
 		System.out.println(i+1 + ": " + rocketsArray[i]);
 		}
 		
-		while ( rocketChoice <= 0 || planetChoice > 5) {
+		while ( rocketChoice <= 0 || rocketChoice > 5) {
+			
+			choice = sc.next();
 			try {
-				rocketChoice = sc.nextInt();
+				rocketChoice = Integer.parseInt(choice);
 			}
-			catch (Exception e) {			
+			catch (Exception e) {
+				System.out.println("Enter an Integer");
 			}	
 		
-			if (planetChoice <= 0) {
+			if (rocketChoice <= 0) {
 				System.out.println("Invalid Entry");
 			}
-			if (planetChoice > 5) {
+			if (rocketChoice > 5) {
 				System.out.println("Invalid Entry");
 			}
 		}
@@ -84,7 +92,7 @@ public class RocketLauncher {
 		
 		mass = massArray[rocketChoice];
 		rocketWeight = mass * gravity;
-		System.out.println("The mass of the rocket is " + mass + "Kg");
+		System.out.println("The mass of the rocket is " + mass + "kg");
 		
 		
 		// Fuel
@@ -92,15 +100,23 @@ public class RocketLauncher {
 		System.out.println("(Press any Key then Enter to Continue)");
 		next = sc.next();
 		
+
 		System.out.println("How much fuel(kg) would you like to enter?");
-		fuelAmount = sc.nextInt();
+		
+		choice = sc.next();
+		try {
+			fuelAmount = Integer.parseInt(choice);
+		}
+		catch (Exception e) {
+			System.out.println("Invalid entry");
+		}
 		
 		// Thrust
 		System.out.println("");
 		System.out.println("(Press any Key then Enter to Continue)");
 		next = sc.next();
 		
-		System.out.println("How much thrust?");
+		System.out.println("How much thrust(N)?");
 		thrust = sc.nextInt();
 		
 		// Does rocket have fuel
@@ -110,13 +126,13 @@ public class RocketLauncher {
 			System.exit(0);
 		}
 		else if (fuelAmount > 0) {
-			System.out.println("Your Rocket has fuel.");
+			System.out.println("Has fuel.");
 		}
 		
 		// Thrust amount
 		if (thrust <= rocketWeight) {
-			System.out.println("Launch failed");
-			System.out.println("Cannot carry mass of rocket");
+			System.out.println("Cannot carry mass of rocket(Not enough thrust)");
+			System.out.println("Launch failed");	
 			System.exit(0);
 		}
 		else if(thrust > rocketWeight) {
@@ -136,11 +152,7 @@ public class RocketLauncher {
 			System.out.println("Launch was short.");
 		}
 		
-		
-		
-		
-		
-		
+			
 		// for memory management
 		sc.close();
 
@@ -161,6 +173,27 @@ public class RocketLauncher {
 		}
 		else
 			return false;
+		
+	}
+	
+	/*Description - determines output based on entered integer
+	 * Parameters - int a
+	 * Return type - int
+	 */
+	public static int planetSelection(int a) {
+		
+		if (a <= 0) {
+			return -1;
+		}
+		
+		if (a > 0 && a < 7) {
+			return a;
+		}
+		if (a >= 7) {
+			return -1;
+		}
+		else
+			return -1;
 		
 	}
 
