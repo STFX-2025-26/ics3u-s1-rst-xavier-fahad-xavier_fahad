@@ -10,12 +10,12 @@ public class RocketLauncher {
 		int fuelAmount = -1;
 		String[] planetsArray = {"Venus", "Earth","Mars", "Jupiter", "Neptune", "Ceres"};
 		String planet = "";
-		int thrust = 0;
+		long thrust = 0;
 		String[] rocketsArray = {"Space Shuttle", "Atlas V", "Space Launch System", "Starship", "Falcon heavy"};
 		String rocket = "";
 		double[] gravityArray = {8.87, 9.8, 3.71, 24.8, 11.2, 0.27};
 		double gravity = 0.0;
-		double rocketWeight = 0.0;
+		double rocketWeight = 0;
 		int[] massArray = {2030000, 590000, 2610000, 4989516, 1420000};
 		int mass = 0;
 		int planetChoice = 0;
@@ -103,12 +103,16 @@ public class RocketLauncher {
 
 		System.out.println("How much fuel(kg) would you like to enter?");
 		
-		choice = sc.next();
-		try {
-			fuelAmount = Integer.parseInt(choice);
-		}
-		catch (Exception e) {
-			System.out.println("Invalid entry");
+		while (fuelAmount < 0) {
+			choice = sc.next();
+			try {
+				fuelAmount = Integer.parseInt(choice);
+			}
+			catch (Exception e) {
+				System.out.println("Invalid entry");
+				System.out.println("Try Again");
+				fuelAmount = -1;
+			}
 		}
 		
 		// Thrust
@@ -116,8 +120,20 @@ public class RocketLauncher {
 		System.out.println("(Press any Key then Enter to Continue)");
 		next = sc.next();
 		
+		thrust = -1;
 		System.out.println("How much thrust(N)?");
-		thrust = sc.nextInt();
+		
+		while (thrust < 0) {
+			choice = sc.next();
+			try {
+				thrust = Long.parseLong(choice);
+			}
+			catch (Exception e) {
+				System.out.println("Invalid entry");
+				System.out.println("Try Again");
+				thrust = -1;
+			}
+		}
 		
 		// Does rocket have fuel
 		if (fuelAmount <= 0) {
@@ -142,12 +158,12 @@ public class RocketLauncher {
 		// Fuel levels
 		fuelLevel = fuelLevel(fuelAmount, rocketWeight);
 		
-		if (fuelLevel = true) {
+		if (fuelLevel == true) {
 			System.out.println("Fuel is high");
 			System.out.println("Launch was GREAT!");
 		}
 		
-		if (fuelLevel = false) {
+		if (fuelLevel == false) {
 			System.out.println("Fuel is Low");
 			System.out.println("Launch was short.");
 		}
@@ -162,7 +178,9 @@ public class RocketLauncher {
 	 * Parameters - int fuel, int mass
 	 * Return Type - boolean
 	 */
-	public static boolean fuelLevel(int fuel, double weight) {
+	public static boolean fuelLevel(double fuel, double weight) {
+		
+		
 		
 		if (fuel > weight * 0.5) {
 			return true;
@@ -180,7 +198,7 @@ public class RocketLauncher {
 	 * Parameters - int a
 	 * Return type - int
 	 */
-	public static int planetSelection(int a) {
+	/*public static int planetSelection(int a) {
 		
 		if (a <= 0) {
 			return -1;
@@ -196,5 +214,5 @@ public class RocketLauncher {
 			return -1;
 		
 	}
-
+	 */
 }
